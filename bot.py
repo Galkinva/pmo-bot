@@ -1,6 +1,6 @@
 import os, logging, asyncio, json
 from datetime import datetime, date, timedelta
-import pytz
+from zoneinfo import ZoneInfo
 from telegram import Bot, Update
 from telegram.ext import Application, CommandHandler, ContextTypes
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
@@ -14,7 +14,7 @@ BOT_TOKEN    = os.environ['BOT_TOKEN']
 CHAT_ID      = os.environ['CHAT_ID']
 GOOGLE_CREDS = os.environ['GOOGLE_CREDS']
 SPREADSHEET  = os.environ.get('SPREADSHEET_ID','')
-TZ           = pytz.timezone('Europe/Moscow')
+TZ           = ZoneInfo('Europe/Moscow')
 
 def get_sheets_client():
     d=json.loads(GOOGLE_CREDS)
@@ -64,7 +64,8 @@ def digest(tasks,ms):
         L.append('📌 *Сегодня:*')
         for x in td[:8]: L.extend([f'  {se(x["status"])} `{x["code"]}` {x["name"][:40]}',f'     └ {x["resp"]}'])
         L.append('')
-    else: L.append('📌 *Сегодня:* задач с дедлайном нет\n')
+    else: L.append('📌 *Сегодня:* задач с дедлайном нет
+')
     if wk:
         L.append(f'📅 *На 7 дней ({len(wk)} задач):*')
         for x in sorted(wk,key=lambda x:x['end'])[:8]: L.append(f'  ⭕ `{x["code"]}` {x["name"][:35]} — {x["end"].strftime("%d.%m")}')
