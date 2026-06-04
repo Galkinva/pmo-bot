@@ -254,7 +254,7 @@ async def job_milestones(context: CallbackContext):
 
 # ── Запуск ────────────────────────────────────────────────────────────────────
 
-async def main():
+def main():
     app = Application.builder().token(BOT_TOKEN).build()
 
     app.add_handler(CommandHandler('start', cmd_start))
@@ -267,13 +267,8 @@ async def main():
     jq.run_daily(job_milestones, time=time(9, 5, tzinfo=MSK))
 
     logger.info('PMO Bot running...')
-    async with app:
-        await app.start()
-        await app.updater.start_polling(allowed_updates=Update.ALL_TYPES)
-        await app.updater.stop()
-        await app.stop()
+    app.run_polling(allowed_updates=Update.ALL_TYPES)
 
 
 if __name__ == '__main__':
-    import asyncio
-    asyncio.run(main())
+    main()
