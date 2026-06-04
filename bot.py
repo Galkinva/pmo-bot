@@ -64,8 +64,8 @@ def digest(tasks,ms):
         L.append('📌 *Сегодня:*')
         for x in td[:8]: L.extend([f'  {se(x["status"])} `{x["code"]}` {x["name"][:40]}',f'     └ {x["resp"]}'])
         L.append('')
-    else: L.append('📌 *Сегодня:* задач с дедлайном нет
-')
+    else: L.append('📌 *Сегодня:* задач с дедлайном нет')
+
     if wk:
         L.append(f'📅 *На 7 дней ({len(wk)} задач):*')
         for x in sorted(wk,key=lambda x:x['end'])[:8]: L.append(f'  ⭕ `{x["code"]}` {x["name"][:35]} — {x["end"].strftime("%d.%m")}')
