@@ -143,7 +143,7 @@ def build_digest(tasks, milestones):
     if week_list:
         lines.append(E_CAL + ' *На 7 дней (' + str(len(week_list)) + ' задач):*')
         for t in sorted(week_list, key=lambda x: x['end'])[:8]:
-            lines.append('  ' + E_CIRC + ' `' + t['code'] + '` ' + t['name'][:35] + ' - ' + t['end'].strftime('%d.%m'))
+            lines.append('  ' + E_CIRC + ' `' + t['code'] + '` ' + t['name'][:35] + ' - ' + t['resp'] + ' - ' + t['end'].strftime('%d.%m'))
         lines.append('')
     lines.append(E_LINK + ' https://galkinva.github.io/pmo-dinosaurs/')
     return '\n'.join(lines)
